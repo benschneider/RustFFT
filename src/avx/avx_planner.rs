@@ -214,24 +214,6 @@ impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f32, T> {
                     self.cache.insert(&arc);
                     return arc;
                 }
-                1000 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft1000::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
-                1536 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft1536::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
                 _ => {}
             }
         }
@@ -259,24 +241,6 @@ impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f64, T> {
                         return instance;
                     }
                     let fft = crate::algorithm::special::Fft256::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
-                1000 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft1000::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
-                1536 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft1536::<T>::new(direction);
                     let arc = wrap_fft(fft);
                     self.cache.insert(&arc);
                     return arc;
