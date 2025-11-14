@@ -7,7 +7,7 @@ use crate::wasm_simd::wasm_simd_planner::FftPlannerWasmSimd;
 use crate::{common::FftNum, fft_cache::FftCache, FftDirection};
 
 use crate::algorithm::butterflies::*;
-use crate::algorithm::special::Fft256;
+//use crate::algorithm::special::Fft256;
 use crate::algorithm::*;
 use crate::Fft;
 
