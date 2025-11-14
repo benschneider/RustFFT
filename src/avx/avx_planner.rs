@@ -214,15 +214,6 @@ impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f32, T> {
                     self.cache.insert(&arc);
                     return arc;
                 }
-                512 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft512::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
                 1000 => {
                     if let Some(instance) = self.cache.get(len, direction) {
                         return instance;
@@ -268,15 +259,6 @@ impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f64, T> {
                         return instance;
                     }
                     let fft = crate::algorithm::special::Fft256::<T>::new(direction);
-                    let arc = wrap_fft(fft);
-                    self.cache.insert(&arc);
-                    return arc;
-                }
-                512 => {
-                    if let Some(instance) = self.cache.get(len, direction) {
-                        return instance;
-                    }
-                    let fft = crate::algorithm::special::Fft512::<T>::new(direction);
                     let arc = wrap_fft(fft);
                     self.cache.insert(&arc);
                     return arc;

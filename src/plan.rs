@@ -297,33 +297,6 @@ impl<T: FftNum> FftPlannerScalar<T> {
                 self.algorithm_cache.insert(&fft);
                 return fft;
             }
-            if len == 512 {
-                if let Some(instance) = self.algorithm_cache.get(len, direction) {
-                    return instance;
-                }
-                let fft = Arc::new(crate::algorithm::special::Fft512::new(direction))
-                    as Arc<dyn Fft<T>>;
-                self.algorithm_cache.insert(&fft);
-                return fft;
-            }
-            if len == 1000 {
-                if let Some(instance) = self.algorithm_cache.get(len, direction) {
-                    return instance;
-                }
-                let fft = Arc::new(crate::algorithm::special::Fft1000::new(direction))
-                    as Arc<dyn Fft<T>>;
-                self.algorithm_cache.insert(&fft);
-                return fft;
-            }
-            if len == 1536 {
-                if let Some(instance) = self.algorithm_cache.get(len, direction) {
-                    return instance;
-                }
-                let fft = Arc::new(crate::algorithm::special::Fft1536::new(direction))
-                    as Arc<dyn Fft<T>>;
-                self.algorithm_cache.insert(&fft);
-                return fft;
-            }
         }
         // Step 1: Create a "recipe" for this FFT, which will tell us exactly which combination of algorithms to use
         let recipe = self.design_fft_for_len(len);
