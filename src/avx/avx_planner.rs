@@ -203,6 +203,42 @@ struct AvxPlannerInternal<A: AvxNum, T: FftNum> {
 
 impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f32, T> {
     fn plan_and_construct_fft(&mut self, len: usize, direction: FftDirection) -> Arc<dyn Fft<T>> {
+        if len == 256 {
+            if let Some(instance) = self.cache.get(len, direction) {
+                return instance;
+            }
+            let fft = crate::algorithm::special::Fft256::<T>::new(direction);
+            let arc = wrap_fft(fft);
+            self.cache.insert(&arc);
+            return arc;
+        }
+        if len == 512 {
+            if let Some(instance) = self.cache.get(len, direction) {
+                return instance;
+            }
+            let fft = crate::algorithm::special::Fft512::<T>::new(direction);
+            let arc = wrap_fft(fft);
+            self.cache.insert(&arc);
+            return arc;
+        }
+        if len == 512 {
+            if let Some(instance) = self.cache.get(len, direction) {
+                return instance;
+            }
+            let fft = crate::algorithm::special::Fft512::<T>::new(direction);
+            let arc = wrap_fft(fft);
+            self.cache.insert(&arc);
+            return arc;
+        }
+        if len == 256 {
+            if let Some(instance) = self.cache.get(len, direction) {
+                return instance;
+            }
+            let fft = crate::algorithm::special::Fft256::<T>::new(direction);
+            let arc = wrap_fft(fft);
+            self.cache.insert(&arc);
+            return arc;
+        }
         // Step 1: Create a plan for this FFT length.
         let plan = self.plan_fft(len, direction, Self::plan_mixed_radix_base);
 
@@ -220,6 +256,15 @@ impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f32, T> {
 }
 impl<T: FftNum> AvxPlannerInternalAPI<T> for AvxPlannerInternal<f64, T> {
     fn plan_and_construct_fft(&mut self, len: usize, direction: FftDirection) -> Arc<dyn Fft<T>> {
+        if len == 256 {
+            if let Some(instance) = self.cache.get(len, direction) {
+                return instance;
+            }
+            let fft = crate::algorithm::special::Fft256::<T>::new(direction);
+            let arc = wrap_fft(fft);
+            self.cache.insert(&arc);
+            return arc;
+        }
         // Step 1: Create a plan for this FFT length.
         let plan = self.plan_fft(len, direction, Self::plan_mixed_radix_base);
 
